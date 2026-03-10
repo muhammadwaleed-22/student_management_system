@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="-mx-4 sm:-mx-6">
+    <section class=" py-12">
+        <div class="mx-auto grid max-w-6xl gap-8 px-4 sm:px-6 lg:grid-cols-2 lg:items-center">
+            <div class="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm">
+                <p class="text-xs font-bold uppercase tracking-widest text-blue-700">Get started</p>
+                <h2 class="mt-2 text-3xl font-extrabold text-slate-900" style="font-family: 'Sora', sans-serif;">Create your learning account</h2>
+                <p class="mt-2 text-sm text-slate-600">Register now and enroll in courses that match your goals.</p>
+
+                <form method="POST" class="mt-6 space-y-4">
+                    <input type="text" name="username" placeholder="Username"
+                        class="w-full rounded-xl border border-slate-300 px-4 py-3 text-sm outline-none transition focus:border-blue-500" required>
+
+                    <input type="password" name="password" placeholder="Password"
+                        class="w-full rounded-xl border border-slate-300 px-4 py-3 text-sm outline-none transition focus:border-blue-500" required>
+
+                    <button class="w-full rounded-xl bg-blue-600 px-4 py-3 text-sm font-semibold text-white transition hover:bg-blue-700">
+                        Register
+                    </button>
+                </form>
+
+                <p class="mt-4 text-sm text-slate-600">
+                    Already have an account?
+                    <a href="/login" class="font-semibold text-blue-600 hover:text-blue-700">Login here</a>
+                </p>
+            </div>
+
+            <div class="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm">
+                <h3 class="text-2xl font-extrabold text-slate-900" style="font-family: 'Sora', sans-serif;">Why join SkillSpring?</h3>
+                <ul class="mt-5 space-y-3 text-sm text-slate-700">
+                    <li class="rounded-xl bg-slate-100 px-4 py-3">Access curated learning paths</li>
+                    <li class="rounded-xl bg-slate-100 px-4 py-3">Learn from beginner to advanced level</li>
+                    <li class="rounded-xl bg-slate-100 px-4 py-3">Build confidence with practical tasks</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+</div>
+{% endblock %}

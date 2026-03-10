@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Institute App</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%23e80962'/%3E%3Ctext x='50' y='64' text-anchor='middle' font-size='56' font-family='Arial' fill='white'%3EL%3C/text%3E%3C/svg%3E">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root {
+            --brand-primary: #e80962;
+            --brand-primary-dark: #c50752;
+            --surface-base: #ffe3ef;
+            --surface-soft: #fff1f7;
+            --surface-gradient: linear-gradient(180deg, var(--surface-base) 0%, var(--surface-soft) 100%);
+        }
+        * { font-family: sans-serif !important; }
+
+        .bg-blue-600 { background-color: var(--brand-primary) !important; }
+        .hover\:bg-blue-700:hover { background-color: var(--brand-primary-dark) !important; }
+        .text-blue-600 { color: var(--brand-primary) !important; }
+        .text-blue-700 { color: var(--brand-primary-dark) !important; }
+        .hover\:text-blue-600:hover,
+        .hover\:text-blue-700:hover { color: var(--brand-primary-dark) !important; }
+        .border-blue-500,
+        .border-blue-300 { border-color: var(--brand-primary) !important; }
+        .focus\:border-blue-500:focus { border-color: var(--brand-primary) !important; }
+        .bg-blue-100 { background-color: #ffe3ef !important; }
+        .bg-slate-100 { background-color: #fff1f7 !important; }
+        .bg-slate-100\/70 { background-color: rgba(255, 241, 247, 0.7) !important; }
+        .bg-white { background-color: var(--surface-base) !important; }
+        .bg-slate-50 { background: var(--surface-gradient) !important; }
+        .from-slate-100 {
+            --tw-gradient-from: #ffe3ef var(--tw-gradient-from-position) !important;
+            --tw-gradient-to: rgb(255 227 239 / 0) var(--tw-gradient-to-position) !important;
+            --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to) !important;
+        }
+        .from-slate-50 {
+            --tw-gradient-from: var(--surface-base) var(--tw-gradient-from-position) !important;
+            --tw-gradient-to: rgb(240 240 240 / 0) var(--tw-gradient-to-position) !important;
+            --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to) !important;
+        }
+        .via-slate-50 {
+            --tw-gradient-to: rgb(240 240 240 / 0) var(--tw-gradient-to-position) !important;
+            --tw-gradient-stops: var(--tw-gradient-from), var(--surface-soft) var(--tw-gradient-via-position), var(--tw-gradient-to) !important;
+        }
+        .to-blue-50 {
+            --tw-gradient-to: #fff6fa var(--tw-gradient-to-position) !important;
+        }
+
+        .nav-link {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            border-radius: 0.6rem;
+            padding: 0.35rem 0.5rem;
+            transition: color 220ms ease, background-color 220ms ease, transform 220ms ease;
+        }
+
+        .nav-link::after {
+            content: "";
+            position: absolute;
+            left: 0.5rem;
+            right: 0.5rem;
+            bottom: 0.2rem;
+            height: 2px;
+            border-radius: 99px;
+            background: var(--brand-primary);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 260ms ease;
+        }
+
+        .nav-link:hover {
+            color: var(--brand-primary-dark);
+            background: #fff1f7;
+            transform: translateY(-1px);
+        }
+
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            transform: scaleX(1);
+        }
+
+        .nav-link.active {
+            color: var(--brand-primary-dark);
+            background: #fff1f7;
+            font-weight: 700;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        .reveal-on-scroll {
+            opacity: 0;
+            transform: translateY(22px) scale(0.985);
+            transition:
+                opacity 650ms cubic-bezier(.2,.65,.2,1),
+                transform 650ms cubic-bezier(.2,.65,.2,1);
+            transition-delay: var(--reveal-delay, 0ms);
+            will-change: opacity, transform;
+        }
+
+        .reveal-on-scroll.is-visible {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        .hover-pop {
+            transition:
+                transform 260ms cubic-bezier(.2,.8,.2,1),
+                box-shadow 260ms ease,
+                border-color 260ms ease;
+            transform: translateY(0);
+        }
+
+        .hover-pop:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 18px 38px rgba(20, 23, 38, 0.12);
+            border-color: #f3a8cb !important;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .reveal-on-scroll,
+            .hover-pop {
+                transition: none !important;
+                transform: none !important;
+                opacity: 1 !important;
+            }
+        }
+    </style>
+</head>
+<body class="bg-[#ffe3ef] text-slate-900" style="min-height: 100vh; background: var(--surface-gradient); background-repeat: no-repeat; background-attachment: fixed;">
+
+<nav class="sticky top-0 z-50 border-b border-slate-200/70 bg-[#ffe3ef]/90 backdrop-blur-md" style="background: linear-gradient(135deg, rgba(255, 227, 239, 0.95) 0%, rgba(255, 241, 247, 0.95) 100%);">
+    <div class="mx-auto flex max-w-6xl items-center justify-between px-4 py-4 sm:px-6">
+        <a href="/" class="flex items-center gap-2">
+            <span class="text-2xl font-bold tracking-tight text-[#c50752]">LaunchLab</span>
+        </a>
+
+        <div class="flex items-center gap-6 text-sm font-medium text-slate-700">
+        {% if session.get("username") %}
+            {% if session.get("role") == "admin" %}
+                <a href="/admin/students" class="nav-link {% if request.path.startswith('/admin/students') or request.path.startswith('/admin/admin_students') %}active{% endif %}">Students</a>
+                <a href="/admin/courses" class="nav-link {% if request.path.startswith('/admin/courses') %}active{% endif %}">Courses</a>
+                <a href="/admin/enrollments" class="nav-link {% if request.path.startswith('/admin/enrollments') %}active{% endif %}">Enrollments</a>
+            {% else %}
+                <a href="/" class="nav-link {% if request.path == '/' %}active{% endif %}">Home</a>
+                <a href="/about" class="nav-link {% if request.path.startswith('/about') %}active{% endif %}">About</a>
+                <a href="/courses" class="nav-link {% if request.path.startswith('/courses') %}active{% endif %}">Courses</a>
+            {% endif %}
+        {% else %}
+            <a href="/" class="nav-link hidden sm:inline-flex {% if request.path == '/' %}active{% endif %}">Home</a>
+            <a href="/about" class="nav-link hidden sm:inline-flex {% if request.path.startswith('/about') %}active{% endif %}">About</a>
+            <a href="/courses" class="nav-link hidden sm:inline-flex {% if request.path.startswith('/courses') %}active{% endif %}">Courses</a>
+            <a href="/login" class="rounded-lg border border-slate-300 px-3 py-1.5 transition hover:border-blue-300 hover:text-blue-700">Login</a>
+            <a href="/register" class="rounded-lg bg-blue-600 px-3 py-1.5 text-white transition hover:bg-blue-700">Sign Up</a>
+        {% endif %}
+        </div>
+
+        {% if session.get("username") %}
+            <div class="flex items-center gap-3">
+                <span class="rounded-full bg-slate-100 px-3 py-1 text-sm font-medium text-slate-700">{{ session.get("username") }}</span>
+                <a href="/logout" class="rounded-lg bg-rose-500 px-3 py-1.5 text-sm font-semibold text-white transition hover:bg-rose-600">Logout</a>
+            </div>
+        {% endif %}
+    </div>
+</nav>
+
+<div id="page-content" class="px-4 py-6 sm:px-6">
+    {% block content %}{% endblock %}
+</div>
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    <div class="fixed right-4 top-20 z-50 w-full max-w-sm">
+      {% for category, message in messages %}
+        <div class="mb-2 rounded-xl p-3 text-sm font-medium shadow-lg 
+            {% if category == 'success' %}bg-green-100 text-green-800
+            {% elif category == 'error' %}bg-rose-100 text-rose-800
+            {% endif %}">
+          {{ message }}
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+{% endwith %}
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const content = document.getElementById("page-content");
+    if (!content) return;
+
+    const revealTargets = Array.from(
+        content.querySelectorAll(
+            "section, article, .rounded-2xl, .rounded-3xl, .shadow-sm, .shadow-xl"
+        )
+    ).filter((el) => !el.closest("nav, table, thead, tbody, tr"));
+
+    revealTargets.forEach((el, index) => {
+        el.classList.add("reveal-on-scroll");
+        el.style.setProperty("--reveal-delay", `${Math.min(index % 6, 5) * 70}ms`);
+    });
+
+    const hoverTargets = Array.from(
+        content.querySelectorAll("article, a.rounded-2xl, div.rounded-2xl.border.bg-white")
+    );
+    hoverTargets.forEach((el) => el.classList.add("hover-pop"));
+
+    if ("IntersectionObserver" in window) {
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("is-visible");
+                        observer.unobserve(entry.target);
+                    }
+                });
+            },
+            { threshold: 0.15, rootMargin: "0px 0px -8% 0px" }
+        );
+        revealTargets.forEach((el) => observer.observe(el));
+    } else {
+        revealTargets.forEach((el) => el.classList.add("is-visible"));
+    }
+});
+</script>
+
+</body>
+</html>
